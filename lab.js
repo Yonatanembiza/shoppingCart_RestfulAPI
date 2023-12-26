@@ -72,12 +72,27 @@
 // bar();
 // console.log('end'); 
 
-console.log('start'); 
-process.nextTick(() => { 
-    console.log("this is process.nextTick 1"); 
-    setTimeout(() => console.log("this is setTimeout 1"), 0); 
-}); 
-process.nextTick(() => console.log("this is process.nextTick 2")); 
-setImmediate(() => console.log("this is setImmediate")); 
-setTimeout(() => console.log("this is setTimeout 2"), 0); 
-console.log('end'); 
+// console.log('start'); 
+// process.nextTick(() => { 
+//     console.log("this is process.nextTick 1"); 
+//     setTimeout(() => console.log("this is setTimeout 1"), 0); 
+// }); 
+// process.nextTick(() => console.log("this is process.nextTick 2")); 
+// setImmediate(() => console.log("this is setImmediate")); 
+// setTimeout(() => console.log("this is setTimeout 2"), 0); 
+// console.log('end'); 
+console.log('start');
+process.nextTick(()=>console.log('process1'));
+setTimeout(()=>console.log('timeout1'));
+process.nextTick(()=>console.log('process2'));
+setImmediate(()=>console.log('immediate1'));
+setTimeout(()=>console.log('timeout2'));
+process.nextTick(()=>{
+    setTimeout(()=>console.log('process3 with timeout'), 0);
+});
+let promise= new Promise((resolve, reject)=>{
+    console.log('executor');
+    resolve('ok');
+})
+promise.then((result)=> console.log('Resolve =>' + result));
+console.log('end');

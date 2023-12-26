@@ -6,19 +6,20 @@ class Product {
         this.price = price;
         this.description = description;
     }
-    saveProduct() {
+    static saveProduct() {
         Products.push(this);
         return this;
     }
-    update(id) {
-        const productIndex = Products.findIndex(p => p.id === id);
+    static updateProduct() {
+        const productIndex = Products.findIndex(p => p.id === this.id);
         if (productIndex) {
             Products.splice(index, 1, this);
+            return this;
         } else {
             return new Error('Product Not Found');
         }
     }
-    static fetchAll() {
+    static fetchAllProducts() {
         return Products;
     }
     static getProductById(id) {
